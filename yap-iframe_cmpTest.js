@@ -604,7 +604,7 @@ if (!window.__cmp){
         if(window.__cmp){
           console.log("i'm running the true window.cmp stuff");
           window.__cmp("getConsentData", null, function(result, success) {
-            console.log("getConsentData success is:" success);
+            console.log("getConsentData success is:"+success);
             if (success) {
               // consentData contains the base64-encoded consent string
               Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
