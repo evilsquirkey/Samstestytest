@@ -621,7 +621,7 @@ if (!window.__cmp){
           });
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
-        },
+        }
 //      },
 //      return Yahoo;
   //  },
