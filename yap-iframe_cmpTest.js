@@ -563,7 +563,7 @@ if (!window.__cmp){
         /* Set up a __cmp function to do the postMessage and
            stash the callback.
            This function behaves (from the caller's perspective)
-           identically to the same frame __cmp call */
+           identically to the same frame __cmp call 
         window.__cmp = function(cmd, arg, callback) {
           if (!cmpFrame) {
             callback({ msg: "CMP not found" }, false);
@@ -581,7 +581,7 @@ if (!window.__cmp){
           cmpFrame.postMessage(msg, "*");
         };
 
-        /* when we get the return message, call the stashed callback */
+        /* when we get the return message, call the stashed callback 
         window.addEventListener(
           "message",
           function(event) {
