@@ -558,8 +558,9 @@ if(!window.Yahoo){
             if (f.frames["__cmpLocator"]) cmpFrame = f;
             console.log("cmpFrame"+cmpFrame);
           } catch (e) {console.log("something went wrong")}
-          //if (f === window.top) break;
+          if (f === window.top) break;
           f = f.parent;
+          console.log(f);
         }
 
         var cmpCallbacks = {};
@@ -569,11 +570,16 @@ if(!window.Yahoo){
            This function behaves (from the caller's perspective)
            identically to the same frame __cmp call */
         window.__cmp = function(cmd, arg, callback) {
+          console.log(cmd);
+          console.log(arg);
+          console.log(callback);
           if (!cmpFrame) {
             callback({ msg: "CMP not found" }, false);
+            console.log("CMP not found");
             return;
           }
           var callId = Math.random() + "";
+          console.log("callId: "+callId);
           var msg = {
             __cmpCall: {
               command: cmd,
@@ -607,6 +613,7 @@ if(!window.Yahoo){
         );
 
         if(window.__cmp){
+          console.log("window.__cmp is here - yay!");
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
