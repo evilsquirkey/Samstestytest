@@ -546,30 +546,32 @@ if(!window.Yahoo){
       //sam's attempt at a *cough* fix...
 
       if (window.__cmp) {
+      
         console.log("window.__cmp is here yay!");
-        window.__cmp('getConsentData', null, function (result, success) {
-        console.log("window.__cmp to the rescue");
-        if (success) {
-          // consentData contains the base64-encoded consent string
-          Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
-
-          // gdprApplies specifies whether the user is in EU jurisdiction
-          Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
-
-          // pass these 2 values to all ad / pixel calls
-        } else {
-          // either CMP is not on the publisher's page or an error occurred.
-        }
-      });
         
-        // create a meta object of section data
+        window.__cmp('getConsentData', null, function (result, success) {
+        	console.log("window.__cmp to the rescue");
+        	
+          if (success) {
+          	// consentData contains the base64-encoded consent string
+          	Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
+	          // gdprApplies specifies whether the user is in EU jurisdiction
+          	Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
+	          // pass these 2 values to all ad / pixel calls
+        	} else {
+          	// either CMP is not on the publisher's page or an error occurred.
+        	}
+          
+      	});     
+
+// create a meta object of section data
       Yahoo.meta[id] = {
         // internal count for total injections
         count: 0,
         // flag for completion of ad call
         completed: false
       };
-
+      
       this.jsonp({
         url: 'https://ads.yap.yahoo.com/nosdk/wj/v1/getAds.do?locale=en_us&agentVersion=205&adTrackingEnabled=true&totalAds=10' + pu + code + apiKey + gdpr + euconsent,
         error: function(){
@@ -601,10 +603,11 @@ if(!window.Yahoo){
                 code: id
               }
             })
-          );
-      
-      //if (!window.__cmp) {
-    } else {
+          );       
+        
+        }});
+                 
+          } else {
         console.log("no window.__cmp found");
         // find the CMP frame
         var f = window;
