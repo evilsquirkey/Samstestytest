@@ -542,7 +542,23 @@ if(!window.Yahoo){
       //   Yahoo.darla();
       // }
       // process sectionCode
-if(!window.__cmp) {console.log("no window.__cmp");} else {console.log("window.__cmp found");}
+if(!window.__cmp) {console.log("no window.__cmp");} else {console.log("window.__cmp found");
+window.__cmp("getConsentData", null, function(result, success) {
+  console.log(success);
+            if (success) {
+              // consentData contains the base64-encoded consent string
+              Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
+
+              // gdprApplies specifies whether the user is in EU jurisdiction
+              Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
+
+              Yahoo.fetch(Yahoo.adUnitCodes.shift());
+              // pass these 2 values to all ad / pixel calls
+            } else {
+              Yahoo.fetch(Yahoo.adUnitCodes.shift());
+              // either CMP is not on the publisher's page or an error occurred.
+            }
+          });}
    
       if (!window.__cmp) {
         // find the CMP frame
