@@ -546,7 +546,7 @@ if (!window.__cmp){
  } else {
    console.log("window.__cmp found");
  }
-      if (!window.__cmp) {
+      /*if (!window.__cmp) {
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -600,8 +600,7 @@ if (!window.__cmp){
             }
           },
           false
-        );
-
+        );*/
         if(window.__cmp){
           console.log("i'm running the true window.cmp stuff");
           window.__cmp("getConsentData", null, function(result, success) {
