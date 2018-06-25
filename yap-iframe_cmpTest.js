@@ -541,7 +541,11 @@ if(!window.Yahoo){
       //   Yahoo.darla();
       // }
       // process sectionCode
-
+if (!window.__cmp){
+   console.log("window.__cmp not found");
+ } else {
+   console.log("window.__cmp found");
+ }
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
