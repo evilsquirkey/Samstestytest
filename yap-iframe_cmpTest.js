@@ -542,6 +542,8 @@ if(!window.Yahoo){
       //   Yahoo.darla();
       // }
       // process sectionCode
+      
+      //sam's throw something together fix...
 if(!window.__cmp) {console.log("no window.__cmp");} else {console.log("window.__cmp found");
 window.__cmp("getConsentData", null, function(result, success) {
   console.log(success);
@@ -616,7 +618,7 @@ window.__cmp("getConsentData", null, function(result, success) {
           false
         );
 
-        if(window.__cmp){
+        /*if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -634,7 +636,7 @@ window.__cmp("getConsentData", null, function(result, success) {
           });
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
-        }
+        }*/
       }
 
       return Yahoo;
