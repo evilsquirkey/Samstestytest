@@ -543,15 +543,14 @@ if(!window.Yahoo){
       // }
       // process sectionCode
       
-      //sam's attempt at a *cough* fix...
+      //sam's feeble attempt at a fix...
 
       if (window.__cmp) {
       
-        console.log("window.__cmp is here yay!");
+        console.log("window.__cmp is found (must be using safeFrame API)");
         
         window.__cmp('getConsentData', null, function (result, success) {
-        	console.log("window.__cmp to the rescue");
-        	
+        	console.log("getConsentData success: "+success);
           if (success) {
           	// consentData contains the base64-encoded consent string
           	Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
@@ -564,65 +563,21 @@ if(!window.Yahoo){
           
       	});     
 
-// create a meta object of section data
-      Yahoo.meta[id] = {
-        // internal count for total injections
-        count: 0,
-        // flag for completion of ad call
-        completed: false
-      };
-      
-      this.jsonp({
-        url: 'https://ads.yap.yahoo.com/nosdk/wj/v1/getAds.do?locale=en_us&agentVersion=205&adTrackingEnabled=true&totalAds=10' + pu + code + apiKey + gdpr + euconsent,
-        error: function(){
-          // fire error handler callback
-          if(errorHandler && typeof(errorHandler) === 'function'){
-            errorHandler('error', { code: id });
-          }
-          // next section
-          nextSection();
-        },
-        success: function(data){
-          // handle ssi failures
-          if(data && data.additionalErrorInfo){
-            // trigger error handler
-            if(errorHandler && typeof(errorHandler) === 'function'){
-              errorHandler('error', { code: id, error: data });
-            }
-
-
-            // go to next section
-            return nextSection();
-          }
-          // update completed flag
-          Yahoo.meta[id].completed = true;
-          // publish fetch
-          Yahoo.publish('section:fetched',
-            Yahoo.extend(true, Yahoo.meta[id], data, {
-              section: {
-                code: id
-              }
-            })
-          );       
-        
-        }});
-                 
-          } else {
-        console.log("no window.__cmp found");
+// need to add in code to make the ad call
+	      
+	      
+      } else {
+	      //if (!window.__cmp){ 
+        console.log("window.__cmp not found; cue the iframe magic");
         // find the CMP frame
         var f = window;
-        console.log("var f below:");
-        console.log(f);
         var cmpFrame;
         while (!cmpFrame) {
-          console.log("cmpFrame is false")
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
-            console.log("cmpFrame"+cmpFrame);
-          } catch (e) {console.log("something went wrong")}
+          } catch (e) {}
           if (f === window.top) break;
           f = f.parent;
-          console.log(f);
         }
 
         var cmpCallbacks = {};
@@ -722,7 +677,6 @@ if(!window.Yahoo){
     fetch: function(id){
        /*GDPR related changes*/
       if (!window.__cmp) {
-        console.log("am i a duplicate !window.__cmp check");
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -742,7 +696,6 @@ if(!window.Yahoo){
            This function behaves (from the caller's perspective)
            identically to the same frame __cmp call */
         window.__cmp = function (cmd, arg, callback) {
-          console.log("again i feel like i might be a clone");
           if (!cmpFrame) {
             callback({msg: "CMP not found"}, false);
             return;
@@ -778,7 +731,7 @@ if(!window.Yahoo){
         }, false);
       }
 
-      /*window.__cmp('getConsentData', null, function (result, success) {
+window.__cmp('getConsentData', null, function (result, success) {
         console.log("window.__cmp to the rescue");
         if (success) {
           // consentData contains the base64-encoded consent string
@@ -791,7 +744,7 @@ if(!window.Yahoo){
         } else {
           // either CMP is not on the publisher's page or an error occurred.
         }
-      });*/
+      });
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
