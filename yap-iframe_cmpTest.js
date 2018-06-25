@@ -522,6 +522,7 @@ if(!window.Yahoo){
       }
     },
 
+    
     /**
      * Initializes syndication script
      * @param  {Array}  code Array of section codes on the pages
@@ -541,11 +542,8 @@ if(!window.Yahoo){
       //   Yahoo.darla();
       // }
       // process sectionCode
-if (!window.__cmp){
-   console.log("window.__cmp not found");
- } else {
-   console.log("window.__cmp found");
- }
+if(!window.__cmp) {console.log("no window.__cmp");} else {console.log("window.__cmp found");}
+   
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -601,10 +599,9 @@ if (!window.__cmp){
           },
           false
         );
+
         if(window.__cmp){
-          console.log("i'm running the true window.cmp stuff");
           window.__cmp("getConsentData", null, function(result, success) {
-            console.log("getConsentData success is:"+success);
             if (success) {
               // consentData contains the base64-encoded consent string
               Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
@@ -622,9 +619,10 @@ if (!window.__cmp){
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
+      }
+
+      return Yahoo;
     },
-     return Yahoo;
-  },
     /**
      * Pull down view-ability library async
      */
