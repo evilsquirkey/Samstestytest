@@ -545,7 +545,25 @@ if(!window.Yahoo){
       
       //sam's attempt at a *cough* fix...
 
-      if (!window.__cmp) {
+      if (window.__cmp) {
+        console.log("window.__cmp is here yay!");
+        window.__cmp('getConsentData', null, function (result, success) {
+        console.log("window.__cmp to the rescue");
+        if (success) {
+          // consentData contains the base64-encoded consent string
+          Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
+
+          // gdprApplies specifies whether the user is in EU jurisdiction
+          Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
+
+          // pass these 2 values to all ad / pixel calls
+        } else {
+          // either CMP is not on the publisher's page or an error occurred.
+        }
+      });
+      
+      //if (!window.__cmp) {
+    } else {
         console.log("no window.__cmp found");
         // find the CMP frame
         var f = window;
