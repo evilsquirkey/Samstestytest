@@ -606,7 +606,7 @@ if(!window.Yahoo){
           false
         );
 
-        /*if(window.__cmp){
+        if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -624,7 +624,7 @@ if(!window.Yahoo){
           });
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
-        }*/
+        }
       }
 
       return Yahoo;
