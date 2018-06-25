@@ -576,7 +576,8 @@ if(window.__cmp) {
           console.log("cmpFrame is false")
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
-          } catch (e) {}
+            console.log("cmpFrame"+cmpFrame);
+          } catch (e) {console.log("something went wrong")}
           if (f === window.top) break;
           f = f.parent;
         }
