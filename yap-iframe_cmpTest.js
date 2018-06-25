@@ -542,11 +542,10 @@ if(!window.Yahoo){
       // }
       // process sectionCode
 
-      if (!window.__cmp) {
-        // find the CMP frame
-        var f = window;
-        var cmpFrame;
-        while (!cmpFrame) {
+      var f = window;
+var cmpFrame;
+while (!cmpFrame) {
+        console.log("cmpFrame is empty");
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
           } catch (e) {}
@@ -598,7 +597,10 @@ if(!window.Yahoo){
           false
         );
 
-        if(window.__cmp){
+} 
+//add this else statement for when window.__cmp === true (e.g. yahoo using a safeframe api), it currently sits outside of the if statement but never gets executed...
+else {
+	if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -617,7 +619,7 @@ if(!window.Yahoo){
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
-      }
+}
 
       return Yahoo;
     },
