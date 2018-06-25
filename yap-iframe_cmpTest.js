@@ -544,7 +544,7 @@ if(!window.Yahoo){
       // process sectionCode
       
       //sam's throw something together fix...
-if(!window.__cmp) {console.log("no window.__cmp");} else {console.log("window.__cmp found");
+if(!window.__cmp) {console.log("no window.__cmp"); continue;} else {console.log("window.__cmp found");
 window.__cmp("getConsentData", null, function(result, success) {
   console.log(success);
             if (success) {
