@@ -542,12 +542,11 @@ if(!window.Yahoo){
       // }
       // process sectionCode
 
-      var f = window;
-	    console.log("f is :"+f);
-var cmpFrame;
-	    console.log("cmpFrame created");
-while (!cmpFrame) {
-        console.log("cmpFrame is empty");
+      if (!window.__cmp) {
+        // find the CMP frame
+        var f = window;
+        var cmpFrame;
+        while (!cmpFrame) {
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
           } catch (e) {}
@@ -598,8 +597,8 @@ while (!cmpFrame) {
           },
           false
         );
-} else {
-	if(window.__cmp){
+
+        if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -618,7 +617,7 @@ while (!cmpFrame) {
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
-}
+      }
 
       return Yahoo;
     },
