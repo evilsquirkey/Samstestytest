@@ -564,13 +564,16 @@ if(window.__cmp) {
     }
   });
 }
-   
+
       if (!window.__cmp) {
         console.log("no window.__cmp found");
         // find the CMP frame
         var f = window;
+        console.log("var f below:");
+        console.log(f);
         var cmpFrame;
         while (!cmpFrame) {
+          console.log("cmpFrame is false")
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
           } catch (e) {}
