@@ -621,11 +621,10 @@ if (!window.__cmp){
           });
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
-        }
-      }
-
-      return Yahoo;
-    },
+        },
+//      },
+//      return Yahoo;
+  //  },
     /**
      * Pull down view-ability library async
      */
