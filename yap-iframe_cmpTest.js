@@ -543,7 +543,9 @@ if(!window.Yahoo){
       // process sectionCode
 
       var f = window;
+	    console.log("f is :"+f);
 var cmpFrame;
+	    console.log("cmpFrame created");
 while (!cmpFrame) {
         console.log("cmpFrame is empty");
           try {
