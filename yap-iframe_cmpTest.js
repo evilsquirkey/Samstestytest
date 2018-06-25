@@ -596,10 +596,7 @@ while (!cmpFrame) {
           },
           false
         );
-
-} 
-//add this else statement for when window.__cmp === true (e.g. yahoo using a safeframe api), it currently sits outside of the if statement but never gets executed...
-else {
+} else {
 	if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
