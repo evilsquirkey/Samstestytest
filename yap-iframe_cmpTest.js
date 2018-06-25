@@ -546,7 +546,7 @@ if (!window.__cmp){
  } else {
    console.log("window.__cmp found");
  }
-      /*if (!window.__cmp) {
+      if (!window.__cmp) {
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -563,7 +563,7 @@ if (!window.__cmp){
         /* Set up a __cmp function to do the postMessage and
            stash the callback.
            This function behaves (from the caller's perspective)
-           identically to the same frame __cmp call 
+           identically to the same frame __cmp call */
         window.__cmp = function(cmd, arg, callback) {
           if (!cmpFrame) {
             callback({ msg: "CMP not found" }, false);
@@ -581,7 +581,7 @@ if (!window.__cmp){
           cmpFrame.postMessage(msg, "*");
         };
 
-        /* when we get the return message, call the stashed callback 
+        /* when we get the return message, call the stashed callback */
         window.addEventListener(
           "message",
           function(event) {
@@ -600,7 +600,7 @@ if (!window.__cmp){
             }
           },
           false
-        );*/
+        );
         if(window.__cmp){
           console.log("i'm running the true window.cmp stuff");
           window.__cmp("getConsentData", null, function(result, success) {
@@ -622,9 +622,9 @@ if (!window.__cmp){
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
-//      },
-//      return Yahoo;
-  //  },
+    },
+     return Yahoo;
+  },
     /**
      * Pull down view-ability library async
      */
