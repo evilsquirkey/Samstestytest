@@ -613,7 +613,7 @@ if(!window.Yahoo){
         );
 
         if(window.__cmp){
-          console.log("window.__cmp is here - yay!");
+          console.log("window.__cmp doing it's thing with postmessaging");
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -660,6 +660,7 @@ if(!window.Yahoo){
     fetch: function(id){
        /*GDPR related changes*/
       if (!window.__cmp) {
+        console.log("am i a duplicate !window.__cmp check");
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -679,6 +680,7 @@ if(!window.Yahoo){
            This function behaves (from the caller's perspective)
            identically to the same frame __cmp call */
         window.__cmp = function (cmd, arg, callback) {
+          console.log("again i feel like i might be a clone");
           if (!cmpFrame) {
             callback({msg: "CMP not found"}, false);
             return;
@@ -715,6 +717,7 @@ if(!window.Yahoo){
       }
 
       window.__cmp('getConsentData', null, function (result, success) {
+        console.log("window.__cmp to the rescue");
         if (success) {
           // consentData contains the base64-encoded consent string
           Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
