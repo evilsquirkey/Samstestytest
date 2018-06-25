@@ -716,7 +716,7 @@ if(!window.Yahoo){
         }, false);
       }
 
-      window.__cmp('getConsentData', null, function (result, success) {
+      /*window.__cmp('getConsentData', null, function (result, success) {
         console.log("window.__cmp to the rescue");
         if (success) {
           // consentData contains the base64-encoded consent string
@@ -729,7 +729,7 @@ if(!window.Yahoo){
         } else {
           // either CMP is not on the publisher's page or an error occurred.
         }
-      });
+      });*/
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
