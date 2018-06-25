@@ -561,6 +561,47 @@ if(!window.Yahoo){
           // either CMP is not on the publisher's page or an error occurred.
         }
       });
+        
+        // create a meta object of section data
+      Yahoo.meta[id] = {
+        // internal count for total injections
+        count: 0,
+        // flag for completion of ad call
+        completed: false
+      };
+
+      this.jsonp({
+        url: 'https://ads.yap.yahoo.com/nosdk/wj/v1/getAds.do?locale=en_us&agentVersion=205&adTrackingEnabled=true&totalAds=10' + pu + code + apiKey + gdpr + euconsent,
+        error: function(){
+          // fire error handler callback
+          if(errorHandler && typeof(errorHandler) === 'function'){
+            errorHandler('error', { code: id });
+          }
+          // next section
+          nextSection();
+        },
+        success: function(data){
+          // handle ssi failures
+          if(data && data.additionalErrorInfo){
+            // trigger error handler
+            if(errorHandler && typeof(errorHandler) === 'function'){
+              errorHandler('error', { code: id, error: data });
+            }
+
+
+            // go to next section
+            return nextSection();
+          }
+          // update completed flag
+          Yahoo.meta[id].completed = true;
+          // publish fetch
+          Yahoo.publish('section:fetched',
+            Yahoo.extend(true, Yahoo.meta[id], data, {
+              section: {
+                code: id
+              }
+            })
+          );
       
       //if (!window.__cmp) {
     } else {
