@@ -560,7 +560,7 @@ window.__cmp("getConsentData", null, function(result, success) {
               Yahoo.fetch(Yahoo.adUnitCodes.shift());
               // either CMP is not on the publisher's page or an error occurred.
             }
-          });}
+          });},
    
       if (!window.__cmp) {
         // find the CMP frame
