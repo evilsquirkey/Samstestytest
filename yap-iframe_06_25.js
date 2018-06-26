@@ -664,10 +664,10 @@ if(!window.Yahoo){
 
         var cmpCallbacks = {};
 
-        /* Set up a __cmp function to do the postMessage and*/
+        /* Set up a __cmp function to do the postMessage and
            stash the callback.
            This function behaves (from the caller's perspective)
-           identically to the same frame __cmp call 
+           identically to the same frame __cmp call */
         window.__cmp = function (cmd, arg, callback) {
           if (!cmpFrame) {
             callback({msg: "CMP not found"}, false);
