@@ -649,26 +649,26 @@ if(!window.Yahoo){
      */
     fetch: function(id){
        /*GDPR related changes*/
-      if (!window.__cmp) {
+      //if (!window.__cmp) {
         // find the CMP frame
-        var f = window;
-        var cmpFrame;
-        while (!cmpFrame) {
+        //var f = window;
+        //var cmpFrame;
+        /*while (!cmpFrame) {
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
           } catch (e) {
           }
           if (f === window.top) break;
           f = f.parent;
-        }
+        }*/
 
-        var cmpCallbacks = {};
+        //var cmpCallbacks = {};
 
         /* Set up a __cmp function to do the postMessage and
            stash the callback.
            This function behaves (from the caller's perspective)
            identically to the same frame __cmp call */
-        window.__cmp = function (cmd, arg, callback) {
+        /*window.__cmp = function (cmd, arg, callback) {
           if (!cmpFrame) {
             callback({msg: "CMP not found"}, false);
             return;
@@ -687,7 +687,7 @@ if(!window.Yahoo){
 
 
         /* when we get the return message, call the stashed callback*/
-        window.addEventListener("message", function (event) {
+       /* window.addEventListener("message", function (event) {
           var msgIsString = typeof event.data === "string";
           var json = event.data;
           if (msgIsString) {
@@ -716,7 +716,7 @@ if(!window.Yahoo){
         } else {
           // either CMP is not on the publisher's page or an error occurred.
         }
-      });
+      });*/
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
@@ -808,7 +808,7 @@ if(!window.Yahoo){
           });
           // next section
           nextSection();
-        }
+        //}
       });
     },
     /**
