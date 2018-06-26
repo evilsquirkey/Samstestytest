@@ -809,7 +809,7 @@ if(!window.Yahoo){
           // next section
           nextSection();
         //}
-      });
+      //});
     },
     /**
      * Tracks ad positions, pulls geometry and
