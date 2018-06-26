@@ -648,7 +648,7 @@ if(!window.Yahoo){
      * and the injection process
      */
     fetch: function(id){
-       /*GDPR related changes
+       /*GDPR related changes*/
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -664,7 +664,7 @@ if(!window.Yahoo){
 
         var cmpCallbacks = {};
 
-        /* Set up a __cmp function to do the postMessage and
+        /* Set up a __cmp function to do the postMessage and*/
            stash the callback.
            This function behaves (from the caller's perspective)
            identically to the same frame __cmp call 
@@ -686,7 +686,7 @@ if(!window.Yahoo){
         }
 
 
-        /* when we get the return message, call the stashed callback
+        /* when we get the return message, call the stashed callback*/
         window.addEventListener("message", function (event) {
           var msgIsString = typeof event.data === "string";
           var json = event.data;
@@ -716,7 +716,7 @@ if(!window.Yahoo){
         } else {
           // either CMP is not on the publisher's page or an error occurred.
         }
-      });*/
+      });
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
