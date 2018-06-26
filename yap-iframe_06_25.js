@@ -546,8 +546,6 @@ if(!window.Yahoo){
         // find the CMP frame
         console.log("no window.__cmp found");
         var f = window;
-        console.log("var f =");
-        console.log(f);
         var cmpFrame;
         while (!cmpFrame) {
           try {
@@ -555,6 +553,8 @@ if(!window.Yahoo){
           } catch (e) {}
           if (f === window.top) break;
           f = f.parent;
+        console.log("var f =");
+        console.log(f);
         }
 
         var cmpCallbacks = {};
@@ -566,6 +566,7 @@ if(!window.Yahoo){
         window.__cmp = function(cmd, arg, callback) {
           if (!cmpFrame) {
             callback({ msg: "CMP not found" }, false);
+            console.log("cmpFrame not found");
             return;
           }
           var callId = Math.random() + "";
@@ -642,12 +643,14 @@ if(!window.Yahoo){
 
       document.body.appendChild(script);
     },
-    /**
+    /*
+    Duplicate code?
+    *
      * Fetch section data using JSONP, create meta reference
      * and the injection process
      */
-    fetch: function(id){
-       /*GDPR related changes*/
+    /*fetch: function(id){
+       /*GDPR related changes
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -666,7 +669,7 @@ if(!window.Yahoo){
         /* Set up a __cmp function to do the postMessage and
            stash the callback.
            This function behaves (from the caller's perspective)
-           identically to the same frame __cmp call */
+           identically to the same frame __cmp call 
         window.__cmp = function (cmd, arg, callback) {
           if (!cmpFrame) {
             callback({msg: "CMP not found"}, false);
@@ -685,7 +688,7 @@ if(!window.Yahoo){
         }
 
 
-        /* when we get the return message, call the stashed callback */
+        /* when we get the return message, call the stashed callback
         window.addEventListener("message", function (event) {
           var msgIsString = typeof event.data === "string";
           var json = event.data;
@@ -715,7 +718,7 @@ if(!window.Yahoo){
         } else {
           // either CMP is not on the publisher's page or an error occurred.
         }
-      });
+      });*/
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
