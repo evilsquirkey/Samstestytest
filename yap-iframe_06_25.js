@@ -643,13 +643,11 @@ if(!window.Yahoo){
 
       document.body.appendChild(script);
     },
-    /*
-    Duplicate code?
-    *
+    /**
      * Fetch section data using JSONP, create meta reference
      * and the injection process
      */
-    /*fetch: function(id){
+    fetch: function(id){
        /*GDPR related changes
       if (!window.__cmp) {
         // find the CMP frame
