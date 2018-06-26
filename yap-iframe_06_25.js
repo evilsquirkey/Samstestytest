@@ -619,9 +619,8 @@ if(!window.Yahoo){
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
-
       return Yahoo;
-   //},
+   },
 /*Sam: this Darla script isn't added... */
     
     /**
