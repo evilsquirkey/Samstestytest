@@ -621,7 +621,7 @@ if(!window.Yahoo){
         }
 
       return Yahoo;
-    },
+   //},
 /*Sam: this Darla script isn't added... */
     
     /**
