@@ -543,6 +543,7 @@ if(!window.Yahoo){
       // process sectionCode
 
       if (!window.__cmp) {
+        console.log("no window,__cmp found; going looking for _cmpLocator");
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -600,6 +601,7 @@ if(!window.Yahoo){
 
         
       } else if(window.__cmp){
+        console.log("window.__cmp found (assuming safeFrame API integration)");
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -644,6 +646,11 @@ if(!window.Yahoo){
      */
     fetch: function(id){
        /*GDPR related changes*/
+ 
+      /*Sam: not sure if these are duplicate functions(they look identical to the ones above); more importantly I _think_ this if statement 
+      might be what's stopping ad request being made as the postMessage stash created on line 560 creates 
+      window.__cmp for the iframe so the ad call never gets compiled */
+      
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -733,6 +740,15 @@ if(!window.Yahoo){
               Yahoo.fetch(Yahoo.adUnitCodes.shift());
             }
           };
+
+      //Sam: these don't appear to get executed...
+      console.log("code = "+code);
+      console.log("pu = "+pu);
+      console.log("ri = "+ri);
+      console.log("apiKey = "+apiKey);
+      console.log("gdpr = "+gdpr);
+      console.log("euconsent = "+euconsent);
+
 
       // create a meta object of section data
       Yahoo.meta[id] = {
