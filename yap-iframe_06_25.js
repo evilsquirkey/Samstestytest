@@ -544,7 +544,10 @@ if(!window.Yahoo){
 
       if (!window.__cmp) {
         // find the CMP frame
+        console.log("no window.__cmp found");
         var f = window;
+        console.log("var f =");
+        console.log(f);
         var cmpFrame;
         while (!cmpFrame) {
           try {
@@ -600,6 +603,7 @@ if(!window.Yahoo){
 
         
       } else if(window.__cmp){
+        console.log("window.__cmp found");
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
