@@ -650,6 +650,13 @@ if(!window.Yahoo){
       /*Sam: not sure if these are duplicate functions(they look identical to the ones above); more importantly I _think_ this if statement 
       might be what's stopping ad request being made as the postMessage stash created on line 560 creates 
       window.__cmp for the iframe so the ad call never gets compiled */
+
+      //sam: check to see if window.__cmp is true or false
+      if(!window.__cmp){
+        console.log("window.__cmp is false");
+      } else {
+        console.log("window.__cmp is true");
+      }
       
       if (!window.__cmp) {
         // find the CMP frame
