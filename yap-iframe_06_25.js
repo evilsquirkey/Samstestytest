@@ -738,6 +738,14 @@ if(!window.Yahoo){
               Yahoo.fetch(Yahoo.adUnitCodes.shift());
             }
           };
+      console.log("code = "+code);
+      console.log("pu = "+pu);
+      console.log("ri = "+ri);
+      console.log("apiKey = "+apiKey);
+      console.log("gdpr = "+gdpr);
+      console.log("euconsent = "+euconsent);
+      
+
 
       // create a meta object of section data
       Yahoo.meta[id] = {
