@@ -595,11 +595,10 @@ if(!window.Yahoo){
               cmpCallbacks[i.callId](i.returnValue, i.success);
               delete cmpCallbacks[i.callId];
             }
+            
           },
           false
-        );
-
-        
+        );   
       } else if(window.__cmp){
         console.log("window.__cmp found (assuming safeFrame API integration)");
           window.__cmp("getConsentData", null, function(result, success) {
@@ -623,6 +622,8 @@ if(!window.Yahoo){
 
       return Yahoo;
     },
+/*Sam: this Darla script isn't added... */
+    
     /**
      * Pull down view-ability library async
      */
@@ -646,16 +647,13 @@ if(!window.Yahoo){
      */
     fetch: function(id){
        /*GDPR related changes*/
- 
-      /*Sam: not sure if these are duplicate functions(they look identical to the ones above); more importantly I _think_ this if statement 
-      might be what's stopping ad request being made as the postMessage stash created on line 560 creates 
-      window.__cmp for the iframe so the ad call never gets compiled */
 
-      //sam: check to see if window.__cmp is true or false
+      /*sam: check to see if window.__cmp is true or false - this isn't executed for 
+      when window.__cmp was originally detected as false */
       if(!window.__cmp){
-        console.log("window.__cmp is false");
+        console.log("on 2nd check: window.__cmp is false");
       } else {
-        console.log("window.__cmp is true");
+        console.log("on 2nd check: window.__cmp is true");
       }
       
       if (!window.__cmp) {
