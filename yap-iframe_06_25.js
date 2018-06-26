@@ -808,9 +808,9 @@ if(!window.Yahoo){
           });
           // next section
           nextSection();
-        //}
-      //});
-    },
+        }
+      });
+    //},
     /**
      * Tracks ad positions, pulls geometry and
      * triggers beacons when in units meet thresholds
