@@ -1,3 +1,4 @@
+/* 27th June version */
 /* global sectionCode:true */
 if(!window.Yahoo){
   /* jshint ignore:start */
@@ -542,8 +543,7 @@ if(!window.Yahoo){
       // }
       // process sectionCode
 
-      if (!window.__cmp) {
-        console.log("no window,__cmp found; going looking for _cmpLocator");
+      
         // find the CMP frame
         var f = window;
         var cmpFrame;
@@ -595,12 +595,11 @@ if(!window.Yahoo){
               cmpCallbacks[i.callId](i.returnValue, i.success);
               delete cmpCallbacks[i.callId];
             }
-            
           },
           false
-        );   
-      } else if(window.__cmp){
-        console.log("window.__cmp found (assuming safeFrame API integration)");
+        );
+
+        if(window.__cmp){
           window.__cmp("getConsentData", null, function(result, success) {
             if (success) {
               // consentData contains the base64-encoded consent string
@@ -619,10 +618,10 @@ if(!window.Yahoo){
         } else {
           Yahoo.fetch(Yahoo.adUnitCodes.shift());
         }
+      
+
       return Yahoo;
-   },
-/*Sam: this Darla script isn't added... */
-    
+    },
     /**
      * Pull down view-ability library async
      */
@@ -646,15 +645,6 @@ if(!window.Yahoo){
      */
     fetch: function(id){
        /*GDPR related changes*/
-
-      /*sam: check to see if window.__cmp is true or false - this isn't executed for 
-      when window.__cmp was originally detected as false */
-      if(!window.__cmp){
-        console.log("on 2nd check: window.__cmp is false");
-      } else {
-        console.log("on 2nd check: window.__cmp is true");
-      }
-      
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -744,15 +734,6 @@ if(!window.Yahoo){
               Yahoo.fetch(Yahoo.adUnitCodes.shift());
             }
           };
-
-      //Sam: these don't appear to get executed...
-      console.log("code = "+code);
-      console.log("pu = "+pu);
-      console.log("ri = "+ri);
-      console.log("apiKey = "+apiKey);
-      console.log("gdpr = "+gdpr);
-      console.log("euconsent = "+euconsent);
-
 
       // create a meta object of section data
       Yahoo.meta[id] = {
