@@ -547,13 +547,13 @@ if(!window.Yahoo){
         // find the CMP frame
         var f = window;
         var cmpFrame;
-        while (!cmpFrame) {
+       /* while (!cmpFrame) {
           try {
             if (f.frames["__cmpLocator"]) cmpFrame = f;
           } catch (e) {}
           if (f === window.top) break;
           f = f.parent;
-        }
+        }*/
 
         var cmpCallbacks = {};
 
