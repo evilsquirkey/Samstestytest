@@ -1,4 +1,4 @@
-/* 27th June version */
+/* 27th June version - v2 */
 /* global sectionCode:true */
 if(!window.Yahoo){
   /* jshint ignore:start */
@@ -537,114 +537,7 @@ if(!window.Yahoo){
           Yahoo.adUnitCodes.push(code[i]);
         }
       }
-      // //For iframe lets not load darla
-      // if(!darlaComplete){
-      //   Yahoo.darla();
-      // }
-      // process sectionCode
 
-      
-        // find the CMP frame
-        var f = window;
-        var cmpFrame;
-       /* while (!cmpFrame) {
-          try {
-            if (f.frames["__cmpLocator"]) cmpFrame = f;
-          } catch (e) {}
-          if (f === window.top) break;
-          f = f.parent;
-        }*/
-
-        var cmpCallbacks = {};
-
-        /* Set up a __cmp function to do the postMessage and
-           stash the callback.
-           This function behaves (from the caller's perspective)
-           identically to the same frame __cmp call */
-        window.__cmp = function(cmd, arg, callback) {
-          if (!cmpFrame) {
-            callback({ msg: "CMP not found" }, false);
-            return;
-          }
-          var callId = Math.random() + "";
-          var msg = {
-            __cmpCall: {
-              command: cmd,
-              parameter: arg,
-              callId: callId
-            }
-          };
-          cmpCallbacks[callId] = callback;
-          cmpFrame.postMessage(msg, "*");
-        };
-
-        /* when we get the return message, call the stashed callback */
-        window.addEventListener(
-          "message",
-          function(event) {
-            var msgIsString = typeof event.data === "string";
-            var json = event.data;
-            if (msgIsString) {
-              try {
-                json = JSON.parse(event.data);
-              } catch (e) {}
-            }
-
-            if (json.__cmpReturn) {
-              var i = json.__cmpReturn;
-              cmpCallbacks[i.callId](i.returnValue, i.success);
-              delete cmpCallbacks[i.callId];
-            }
-          },
-          false
-        );
-
-        if(window.__cmp){
-          window.__cmp("getConsentData", null, function(result, success) {
-            if (success) {
-              // consentData contains the base64-encoded consent string
-              Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
-
-              // gdprApplies specifies whether the user is in EU jurisdiction
-              Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
-
-              Yahoo.fetch(Yahoo.adUnitCodes.shift());
-              // pass these 2 values to all ad / pixel calls
-            } else {
-              Yahoo.fetch(Yahoo.adUnitCodes.shift());
-              // either CMP is not on the publisher's page or an error occurred.
-            }
-          });
-        } else {
-          Yahoo.fetch(Yahoo.adUnitCodes.shift());
-        }
-      
-
-      return Yahoo;
-    },
-    /**
-     * Pull down view-ability library async
-     */
-    darla: function(){
-      // include DARLA for viewability
-      var script = document.createElement('script');
-
-      script.async = true;
-      script.src = 'https://s.yimg.com/rq/darla/2-8-9/js/g-d-min.js';
-
-      script.onload = function(){
-        darlaComplete = true;
-        Yahoo.viewability();
-      };
-
-      document.body.appendChild(script);
-    },
-    /**
-     * Fetch section data using JSONP, create meta reference
-     * and the injection process
-     */
-    fetch: function(id){
-       /*GDPR related changes*/
       if (!window.__cmp) {
         // find the CMP frame
         var f = window;
@@ -700,19 +593,53 @@ if(!window.Yahoo){
         }, false);
       }
 
-      window.__cmp('getConsentData', null, function (result, success) {
-        if (success) {
-          // consentData contains the base64-encoded consent string
-          Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
+       if(window.__cmp){
+	       window.__cmp('getConsentData', null, function (result, success) {
+	        if (success) {
+	          // consentData contains the base64-encoded consent string
+	          Yahoo.y_euconsent = result.consentData === undefined ? "" : result.consentData;
 
-          // gdprApplies specifies whether the user is in EU jurisdiction
-          Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
+	          // gdprApplies specifies whether the user is in EU jurisdiction
+	          Yahoo.y_gdpr = result.gdprApplies === undefined ? "" : result.gdprApplies;
 
-          // pass these 2 values to all ad / pixel calls
-        } else {
-          // either CMP is not on the publisher's page or an error occurred.
-        }
-      });
+	          Yahoo.fetch(Yahoo.adUnitCodes.shift());
+	        } else {
+	          Yahoo.fetch(Yahoo.adUnitCodes.shift());
+	        }
+	      });
+      } else {
+          Yahoo.fetch(Yahoo.adUnitCodes.shift());
+      }
+      
+
+      return Yahoo;
+    },
+    /**
+     * Pull down view-ability library async
+     */
+    darla: function(){
+      // include DARLA for viewability
+      var script = document.createElement('script');
+
+      script.async = true;
+      script.src = 'https://s.yimg.com/rq/darla/2-8-9/js/g-d-min.js';
+
+      script.onload = function(){
+        darlaComplete = true;
+        Yahoo.viewability();
+      };
+
+      document.body.appendChild(script);
+    },
+    /**
+     * Fetch section data using JSONP, create meta reference
+     * and the injection process
+     */
+    fetch: function(id){
+       /*GDPR related changes*/
+      
+
+     
 
       // check length for legacy support of only sectionId
       var code = '&adUnitCode='+id,
